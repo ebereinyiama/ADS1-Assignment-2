@@ -7,10 +7,10 @@ This is a temporary script file.
 
 import pandas as pd
 import numpy as np
-iport seaborn as sns
+import seaborn as sns
 import matplotlib.pyplot as plt
 
-### 14 countries of the world were selected and analyzed for 9 different indicators
+### 10 countries of the world were selected and analyzed for 9 different indicators
 
 ### Having a look at a sample of the original data set before preprocessing
 
@@ -47,34 +47,34 @@ print("original data is: \n",  df_electric)
 print("transposed data is: \n",  df_electric_t)
 
 
-### Selecting the 14 countries for access to electricity
+### Selecting the 12 countries analyzed for access to electricity from transposed dataframe
 
-access_electricity = df_electric_t[['Year', 'Nigeria', 'Algeria', 'Australia', 'Denmark', 'Singapore', 'Netherlands', 
-                        'Ireland', 'Lithuania', 'Central African Republic', 'Croatia', 'Kenya', 'Chad', 
-                        'Morocco', 'Indonesia']]
+access_electricity = df_electric_t[['Year', 'Nigeria', 'Algeria', 'Australia', 'Denmark', 'Singapore', 'Ireland', 
+                                    'Croatia', 'Kenya', 'Chad', 'Morocco', 'Indonesia', 'Brazil']]
 
 ### Removing the NaN
 
 access_electricity = access_electricity.dropna()
 access_electricity = access_electricity.reset_index()
 access_electricity = access_electricity.drop(columns="index")
-print("list of countries and access to electricity: \n", access_electricity)
+print("list of countries and their % population access to electricity: \n", access_electricity)
 
-### line plot for access to electricity
-access_electricity.plot("Year", ['Nigeria', 'Algeria', 'Australia', 'Denmark', 'Singapore', 'Netherlands', 
-                        'Ireland', 'Lithuania', 'Central African Republic', 'Croatia', 'Kenya', 'Chad', 
-                        'Morocco', 'Indonesia'], style = ["g-", "r:", "k--", "b-.", "y-", "g-.", "c--", "m:", "k:", 
-                                                         "b-", "r-", "k-", "m-", "c-."], title="Access to Electricity", figsize=(10,8))
+### line plot for access to electricity(% of population)
+
+access_electricity.plot("Year", ['Nigeria', 'Algeria', 'Australia', 'Denmark', 'Singapore', 'Ireland', 
+                                    'Croatia', 'Kenya', 'Chad', 'Morocco', 'Indonesia', 'Brazil'], style = ["g-", "r:", "k--", "b-.", "y-", "g-.", "c--", "m:", 
+                                                          "b-", "r-", "k-", "m-"], title="Access to electricity (% of population)", figsize=(10,8))
 
 plt.xticks(rotation=45.0)
+plt.legend(bbox_to_anchor=(1, 1))
+plt.xlabel('Year')
+plt.ylabel('% of Population')
 plt.show()
 
-
-
-### (2) Agricultural land - the second indicator
+### (2) Agricultural land - the second indicator analyzed
 
 def agricultural_land(agric):
-    """creating a function to return two dataframes for agricultural land"""
+    """creating a function to return two dataframes for agricultural land; original dataframe and transposed dataframe"""
     
     df_2 = pd.read_csv(agric, skiprows=4)
     df_2 = df_2.drop(['Country Code', 'Indicator Name', 'Indicator Code'], axis = 1)
@@ -90,25 +90,26 @@ def agricultural_land(agric):
 df_agric, df_agric_t = agricultural_land("Agricultural land.csv")
 
 
-### selecting the 14 countries being analyzed
+### selecting the 12 countries being analyzed
 
-agric_land = df_agric_t[['Year', 'Nigeria', 'Algeria', 'Australia', 'Denmark', 'Singapore', 'Netherlands', 
-                        'Ireland', 'Lithuania', 'Central African Republic', 'Croatia', 'Kenya', 'Chad', 
-                        'Morocco', 'Indonesia']]
+agric_land = df_agric_t[['Year', 'Nigeria', 'Algeria', 'Australia', 'Denmark', 'Singapore', 'Ireland', 
+                                    'Croatia', 'Kenya', 'Chad', 'Morocco', 'Indonesia', 'Brazil']]
 
 agric_land = agric_land.dropna()
 agric_land = agric_land.reset_index()
 agric_land = agric_land.drop(columns="index")
-print("list of countries and their agricultural land: \n", agric_land)
+print("list of the 12 countries and their agricultural land area: \n", agric_land)
 
 ### line plot for agricultural land from year 2000
 
 agric_land = agric_land.iloc[39:, :]
-agric_land.plot("Year", ['Nigeria', 'Algeria', 'Australia', 'Denmark', 'Singapore', 'Netherlands', 
-                        'Ireland', 'Lithuania', 'Central African Republic', 'Croatia', 'Kenya', 'Chad', 
-                        'Morocco', 'Indonesia'], style = ["g-", "r:", "k--", "b-.", "y-", "g-.", "c--", "m:", "k:", 
-                                                         "b-", "r-", "k-", "m-", "c-."], title="Agricultural land", figsize=(10,8))
+agric_land.plot("Year", ['Nigeria', 'Algeria', 'Australia', 'Denmark', 'Singapore', 'Ireland', 
+                                    'Croatia', 'Kenya', 'Chad', 'Morocco', 'Indonesia', 'Brazil'], style = ["g-", "r:", "k--", "b-.", "y-", "g-.", "c--", "m:", 
+                                                          "b-", "r-", "k-", "m-"], title="Agricultural land (% of land area)", figsize=(10,8))
 plt.xticks(rotation=45.0)
+plt.legend(bbox_to_anchor=(1, 1))
+plt.xlabel('Year')
+plt.ylabel('% of land area')
 plt.show()
 
 
@@ -116,7 +117,7 @@ plt.show()
 ### (3) CO2 Emission; the third indicator
 
 def CO2_emission(CO2):
-    """Creating a funtion to return dataframes for CO2 emission"""
+    """Creating a funtion to return 2 dataframes for CO2 emission"""
     
     df_3 = pd.read_csv(CO2, skiprows=4)
     df_3 = df_3.drop(['Country Code', 'Indicator Name', 'Indicator Code'], axis = 1)
@@ -131,24 +132,25 @@ def CO2_emission(CO2):
 
 df_CO2, df_CO2_t = CO2_emission("CO2 emission.csv")
 
-###Selecting the 14 countries for CO2 emission.
+### Selecting the 12 countries for CO2 emission.
 
-CO2Emission = df_CO2_t[['Year', 'Nigeria', 'Algeria', 'Australia', 'Denmark', 'Singapore', 'Netherlands', 
-                        'Ireland', 'Lithuania', 'Central African Republic', 'Croatia', 'Kenya', 'Chad', 
-                        'Morocco', 'Indonesia']]
+CO2Emission = df_CO2_t[['Year', 'Nigeria', 'Algeria', 'Australia', 'Denmark', 'Singapore', 'Ireland', 
+                                    'Croatia', 'Kenya', 'Chad', 'Morocco', 'Indonesia', 'Brazil']]
 CO2Emission = CO2Emission.dropna()
 CO2Emission = CO2Emission.reset_index()
 CO2Emission = CO2Emission.drop(columns="index")
-print("the CO2 emission from the 14 countries are: \n", CO2Emission)
+print("the CO2 emission from the 12 countries are: \n", CO2Emission)
 
 ### line plot for CO2 emission from year 2000
 
 CO2Emission = CO2Emission.iloc[10:, :]
-CO2Emission.plot("Year", ['Nigeria', 'Algeria', 'Australia', 'Denmark', 'Singapore', 'Netherlands', 
-                        'Ireland', 'Lithuania', 'Central African Republic', 'Croatia', 'Kenya', 'Chad', 
-                        'Morocco', 'Indonesia'], style = ["g-", "r:", "k--", "b-.", "y-", "g-.", "c--", "m:", "k:", 
-                                                         "b-", "r-", "k-", "m-", "c-."], title="CO2 Emission", figsize=(10,8))
+CO2Emission.plot("Year", ['Nigeria', 'Algeria', 'Australia', 'Denmark', 'Singapore', 'Ireland', 
+                                    'Croatia', 'Kenya', 'Chad', 'Morocco', 'Indonesia', 'Brazil'], style = ["g-", "r:", "k--", "b-.", "y-", "g-.", "c--", "m:", 
+                                                          "b-", "r-", "k-", "m-"], title="CO2 Emission (kt)", figsize=(10,8))
 plt.xticks(rotation=45.0)
+plt.legend(bbox_to_anchor=(1, 1))
+plt.xlabel('Year')
+plt.ylabel('CO2 Emission')
 plt.show()
 
 
@@ -171,25 +173,26 @@ def forest_area(forest):
 
 df_forest, df_forest_t = forest_area("Forest area.csv")
 
-### Selecting the 14 countries for Forest area
+### Selecting the 12 countries for Forest area
 
-ForestArea = df_forest_t[['Year', 'Nigeria', 'Algeria', 'Australia', 'Denmark', 'Singapore', 'Netherlands', 
-                        'Ireland', 'Lithuania', 'Central African Republic', 'Croatia', 'Kenya', 'Chad', 
-                        'Morocco', 'Indonesia']]
+ForestArea = df_forest_t[['Year', 'Nigeria', 'Algeria', 'Australia', 'Denmark', 'Singapore', 'Ireland', 
+                                    'Croatia', 'Kenya', 'Chad', 'Morocco', 'Indonesia', 'Brazil']]
 ForestArea = ForestArea.dropna()
 ForestArea = ForestArea.reset_index()
 ForestArea = ForestArea.drop(columns="index")
 
-print("The forest area of the 14 countries: \n", ForestArea)
+print("The forest area of the 12 countries: \n", ForestArea)
 
 ### line plot for forest area from year 2000
 
 ForestArea = ForestArea.iloc[8:, :]
-ForestArea.plot("Year", ['Nigeria', 'Algeria', 'Australia', 'Denmark', 'Singapore', 'Netherlands', 
-                        'Ireland', 'Lithuania', 'Central African Republic', 'Croatia', 'Kenya', 'Chad', 
-                        'Morocco', 'Indonesia'], style = ["g-", "r:", "k--", "b-.", "y-", "g-.", "c--", "m:", "k:", 
-                                                         "b-", "r-", "k-", "m-", "c-."], title="Forest Area", figsize=(10,8))
+ForestArea.plot("Year", ['Nigeria', 'Algeria', 'Australia', 'Denmark', 'Singapore', 'Ireland', 
+                                    'Croatia', 'Kenya', 'Chad', 'Morocco', 'Indonesia', 'Brazil'], style = ["g-", "r:", "k--", "b-.", "y-", "g-.", "c--", "m:", 
+                                                          "b-", "r-", "k-", "m-"], title="Forest Area (% of land area)", figsize=(10,8))
 plt.xticks(rotation=45.0)
+plt.legend(bbox_to_anchor=(1, 1))
+plt.xlabel('Year')
+plt.ylabel('Forest Area')
 plt.show()
 
 
@@ -212,11 +215,10 @@ def population_growth(population):
 
 df_population, df_population_t = population_growth("Population growth.csv")
 
-### Selecting the 14 countries for Population growth
+### Selecting the 12 countries for Population growth
 
-annual_population = df_population_t[['Year', 'Nigeria', 'Algeria', 'Australia', 'Denmark', 'Singapore', 'Netherlands', 
-                        'Ireland', 'Lithuania', 'Central African Republic', 'Croatia', 'Kenya', 'Chad', 
-                        'Morocco', 'Indonesia']]
+annual_population = df_population_t[['Year', 'Nigeria', 'Algeria', 'Australia', 'Denmark', 'Singapore', 'Ireland', 
+                                    'Croatia', 'Kenya', 'Chad', 'Morocco', 'Indonesia', 'Brazil']]
 annual_population = annual_population.dropna()
 annual_population = annual_population.reset_index()
 annual_population = annual_population.drop(columns="index")
@@ -225,11 +227,13 @@ print("the annual percentage of population growth is: \n", annual_population)
 ### Line plot for annual percentage of population growth from year 2000
 
 annual_population = annual_population.iloc[39:, :]
-annual_population.plot("Year", ['Nigeria', 'Algeria', 'Australia', 'Denmark', 'Singapore', 'Netherlands', 
-                        'Ireland', 'Lithuania', 'Central African Republic', 'Croatia', 'Kenya', 'Chad', 
-                        'Morocco', 'Indonesia'], style = ["g-", "r:", "k--", "b-.", "y-", "g-.", "c--", "m:", "k:", 
-                                                         "b-", "r-", "k-", "m-", "c-."], title="Population growth % annual", figsize=(10,8))
+annual_population.plot("Year", ['Nigeria', 'Algeria', 'Australia', 'Denmark', 'Singapore', 'Ireland', 
+                                    'Croatia', 'Kenya', 'Chad', 'Morocco', 'Indonesia', 'Brazil'], style = ["g-", "r:", "k--", "b-.", "y-", "g-.", "c--", "m:", 
+                                                          "b-", "r-", "k-", "m-"], title="Population growth (% annual)", figsize=(10,8))
 plt.xticks(rotation=45.0)
+plt.legend(bbox_to_anchor=(1, 1))
+plt.xlabel('Year')
+plt.ylabel('population growth')
 plt.show()
 
 
@@ -252,25 +256,26 @@ def renewable_energy(energy):
 
 df_energy, df_energy_t = renewable_energy("Renewable energy consumption.csv")
 
-### Selecting the 14 countries for Renewable energy consumption
+### Selecting the 12 countries for Renewable energy consumption
 
-RenewableEnergy = df_energy_t[['Year', 'Nigeria', 'Algeria', 'Australia', 'Denmark', 'Singapore', 'Netherlands', 
-                        'Ireland', 'Lithuania', 'Central African Republic', 'Croatia', 'Kenya', 'Chad', 
-                        'Morocco', 'Indonesia']]
+RenewableEnergy = df_energy_t[['Year', 'Nigeria', 'Algeria', 'Australia', 'Denmark', 'Singapore', 'Ireland', 
+                                    'Croatia', 'Kenya', 'Chad', 'Morocco', 'Indonesia', 'Brazil']]
 RenewableEnergy = RenewableEnergy.dropna()
 RenewableEnergy = RenewableEnergy.reset_index()
 RenewableEnergy = RenewableEnergy.drop(columns="index")
 
-print("the countries and their renewable energy cosumption are: \n", RenewableEnergy)
+print("the countries and their renewable energy cosumption: \n", RenewableEnergy)
 
 ### line plot for renewable energy consumption from year 2000
 
 RenewableEnergy = RenewableEnergy.iloc[10:, :]
-RenewableEnergy.plot("Year", ['Nigeria', 'Algeria', 'Australia', 'Denmark', 'Singapore', 'Netherlands', 
-                        'Ireland', 'Lithuania', 'Central African Republic', 'Croatia', 'Kenya', 'Chad', 
-                        'Morocco', 'Indonesia'], style = ["g-", "r:", "k--", "b-.", "y-", "g-.", "c--", "m:", "k:", 
-                                                         "b-", "r-", "k-", "m-", "c-."], title="Renewable Energy Consumption", figsize=(10,8))
+RenewableEnergy.plot("Year", ['Nigeria', 'Algeria', 'Australia', 'Denmark', 'Singapore', 'Ireland', 
+                                    'Croatia', 'Kenya', 'Chad', 'Morocco', 'Indonesia', 'Brazil'], style = ["g-", "r:", "k--", "b-.", "y-", "g-.", "c--", "m:", 
+                                                          "b-", "r-", "k-", "m-"], title="Renewable Energy Consumption", figsize=(10,8))
 plt.xticks(rotation=45.0)
+plt.legend(bbox_to_anchor=(1, 1))
+plt.xlabel('Year')
+plt.ylabel('% of total energy consumption')
 plt.show()
 
 
@@ -293,11 +298,10 @@ def greenhouse_emission(greenhouse):
 
 df_greenhouse, df_greenhouse_t = greenhouse_emission("Total greenhouse emission.csv")
 
-### Selecting the 14 countries for Total greenhouse emission analysis
+### Selecting the 12 countries for Total greenhouse emission analysis
 
-total_greenhouse = df_greenhouse_t[['Year', 'Nigeria', 'Algeria', 'Australia', 'Denmark', 'Singapore', 'Netherlands', 
-                        'Ireland', 'Lithuania', 'Central African Republic', 'Croatia', 'Kenya', 'Chad', 
-                        'Morocco', 'Indonesia']]
+total_greenhouse = df_greenhouse_t[['Year', 'Nigeria', 'Algeria', 'Australia', 'Denmark', 'Singapore', 'Ireland', 
+                                    'Croatia', 'Kenya', 'Chad', 'Morocco', 'Indonesia', 'Brazil']]
 total_greenhouse = total_greenhouse.dropna()
 total_greenhouse = total_greenhouse.reset_index()
 total_greenhouse = total_greenhouse.drop(columns="index")
@@ -307,11 +311,13 @@ print("The Total Greenhouse Emission from the countries are: \n", total_greenhou
 ### line plot for Total Greenhouse emission from year 2000
 
 total_greenhouse = total_greenhouse.iloc[10:, :]
-total_greenhouse.plot("Year", ['Nigeria', 'Algeria', 'Australia', 'Denmark', 'Singapore', 'Netherlands', 
-                        'Ireland', 'Lithuania', 'Central African Republic', 'Croatia', 'Kenya', 'Chad', 
-                        'Morocco', 'Indonesia'], style = ["g-", "r:", "k--", "b-.", "y-", "g-.", "c--", "m:", "k:", 
-                                                         "b-", "r-", "k-", "m-", "c-."], title="Total Greenhouse Emission", figsize=(10,8))
+total_greenhouse.plot("Year", ['Nigeria', 'Algeria', 'Australia', 'Denmark', 'Singapore', 'Ireland', 
+                                    'Croatia', 'Kenya', 'Chad', 'Morocco', 'Indonesia', 'Brazil'], style = ["g-", "r:", "k--", "b-.", "y-", "g-.", "c--", "m:", 
+                                                          "b-", "r-", "k-", "m-"], title="Total Greenhouse Emission", figsize=(10,8))
 plt.xticks(rotation=45.0)
+plt.legend(bbox_to_anchor=(1, 1))
+plt.xlabel('Year')
+plt.ylabel('Greenhouse emission')
 plt.show()
 
 
@@ -335,11 +341,10 @@ def manufacturing_gdp(manufacturing):
 
 df_manufacturing, df_manufacturing_t = manufacturing_gdp("Manufacturing and gdp.csv")
 
-### Selecting the 14 countries for manufacturing
+### Selecting the 12 countries for manufacturing
 
-manufacturingGDP = df_manufacturing_t[['Year', 'Nigeria', 'Algeria', 'Australia', 'Denmark', 'Singapore', 'Netherlands', 
-                        'Ireland', 'Lithuania', 'Central African Republic', 'Croatia', 'Kenya', 'Chad', 
-                        'Morocco', 'Indonesia']]
+manufacturingGDP = df_manufacturing_t[['Year', 'Nigeria', 'Algeria', 'Australia', 'Denmark', 'Singapore', 'Ireland', 
+                                    'Croatia', 'Kenya', 'Chad', 'Morocco', 'Indonesia', 'Brazil']]
 manufacturingGDP = manufacturingGDP.dropna()
 manufacturingGDP = manufacturingGDP.reset_index()
 manufacturingGDP = manufacturingGDP.drop(columns="index")
@@ -348,11 +353,13 @@ print("The Manufacturing, value added % of GDP of the countries: \n", manufactur
 
 ### line plot for Manufacturing value added % of GDP
 
-manufacturingGDP.plot("Year", ['Nigeria', 'Algeria', 'Australia', 'Denmark', 'Singapore', 'Netherlands', 
-                        'Ireland', 'Lithuania', 'Central African Republic', 'Croatia', 'Kenya', 'Chad', 
-                        'Morocco', 'Indonesia'], style = ["g-", "r:", "k--", "b-.", "y-", "g-.", "c--", "m:", "k:", 
-                                                         "b-", "r-", "k-", "m-", "c-."], title="Manufacturing value added of % GDP", figsize=(10,8))
+manufacturingGDP.plot("Year", ['Nigeria', 'Algeria', 'Australia', 'Denmark', 'Singapore', 'Ireland', 
+                                    'Croatia', 'Kenya', 'Chad', 'Morocco', 'Indonesia', 'Brazil'], style = ["g-", "r:", "k--", "b-.", "y-", "g-.", "c--", "m:", 
+                                                          "b-", "r-", "k-", "m-"], title="Manufacturing value added of % GDP", figsize=(10,8))
 plt.xticks(rotation=45.0)
+plt.legend(bbox_to_anchor=(1, 1))
+plt.xlabel('Year')
+plt.ylabel('value added % of GDP')
 plt.show()
 
 
@@ -375,11 +382,10 @@ def arable_land(arable):
 
 df_arable, df_arable_t = arable_land("Arable land.csv")
 
-### Selecting the 14 countries for Arable land
+### Selecting the 12 countries for Arable land (% of land area)
 
-ArableLand = df_arable_t[['Year', 'Nigeria', 'Algeria', 'Australia', 'Denmark', 'Singapore', 'Netherlands', 
-                        'Ireland', 'Lithuania', 'Central African Republic', 'Croatia', 'Kenya', 'Chad', 
-                        'Morocco', 'Indonesia']]
+ArableLand = df_arable_t[['Year', 'Nigeria', 'Algeria', 'Australia', 'Denmark', 'Singapore', 'Ireland', 
+                                    'Croatia', 'Kenya', 'Chad', 'Morocco', 'Indonesia', 'Brazil']]
 ArableLand = ArableLand.dropna()
 ArableLand = ArableLand.reset_index()
 ArableLand = ArableLand.drop(columns="index")
@@ -389,11 +395,13 @@ print("The Arable land of the countries evaluated: \n", ArableLand)
 ### line plot for Arable land
 
 ArableLand = ArableLand.iloc[8:, :]
-ArableLand.plot("Year", ['Nigeria', 'Algeria', 'Australia', 'Denmark', 'Singapore', 'Netherlands', 
-                        'Ireland', 'Lithuania', 'Central African Republic', 'Croatia', 'Kenya', 'Chad', 
-                        'Morocco', 'Indonesia'], style = ["g-", "r:", "k--", "b-.", "y-", "g-.", "c--", "m:", "k:", 
-                                                         "b-", "r-", "k-", "m-", "c-."], title="Arable land", figsize=(10,8))
+ArableLand.plot("Year", ['Nigeria', 'Algeria', 'Australia', 'Denmark', 'Singapore', 'Ireland', 
+                                    'Croatia', 'Kenya', 'Chad', 'Morocco', 'Indonesia', 'Brazil'], style = ["g-", "r:", "k--", "b-.", "y-", "g-.", "c--", "m:", 
+                                                          "b-", "r-", "k-", "m-"], title="Arable land (% of land area)", figsize=(10,8))
 plt.xticks(rotation=45.0)
+plt.legend(bbox_to_anchor=(1, 1))
+plt.xlabel('Year')
+plt.ylabel('Arable land')
 plt.show()
 
 
