@@ -405,6 +405,48 @@ plt.ylabel('Arable land')
 plt.show()
 
 
+### (10) Population total; the tenth indicator
+
+def population_total(population):
+    """defining a function to return 2 dataframes for annual % of population growth"""
+    
+    df_10 = pd.read_csv(population, skiprows=4)
+    df_10 = df_10.drop(['Country Code', 'Indicator Name', 'Indicator Code'], axis = 1)
+    df_population_total = df_10
+    df_population_total_transpose = pd.DataFrame.transpose(df_10)
+    df_population_total_transpose = df_population_total_transpose.rename(columns=df_population_total_transpose.iloc[0])
+    df_population_total_transpose = df_population_total_transpose.drop(index=df_population_total_transpose.index[0], axis=0)
+    df_population_total_transpose = df_population_total_transpose.reset_index()
+    df_population_total_transpose = df_population_total_transpose.rename(columns={"index":"Year"})
+    
+    return df_population_total, df_population_total_transpose
+
+df_total_population, df_total_population_t = population_total("Population total.csv")
+
+### Selecting the 12 countries for Population total
+
+total_population = df_total_population_t[['Year', 'Nigeria', 'Algeria', 'Australia', 'Denmark', 'Singapore', 'Ireland', 
+                                    'Croatia', 'Kenya', 'Chad', 'Morocco', 'Indonesia', 'Brazil']]
+total_population = total_population.dropna()
+total_population = total_population.reset_index()
+total_population = total_population.drop(columns="index")
+print("the total population of countries: \n", total_population)
+
+### Line plot for total population from year 2000
+
+total_population = total_population.iloc[40:, :]
+total_population.plot("Year", ['Nigeria', 'Algeria', 'Australia', 'Denmark', 'Singapore', 'Ireland', 
+                                    'Croatia', 'Kenya', 'Chad', 'Morocco', 'Indonesia', 'Brazil'], style = ["g-", "r:", "k--", "b-.", "y-", "g-.", "c--", "m:", 
+                                                          "b-", "r-", "k-", "m-"], title="Total population", figsize=(10,8))
+plt.xticks(rotation=45.0)
+plt.legend(bbox_to_anchor=(1, 1))
+plt.xlabel('Year')
+plt.ylabel('total population')
+plt.show()
+
+
+
+
 ### Barchart plots for some indicators - interval of 10 years
 
 ### 1. Agricultural land
@@ -505,6 +547,22 @@ plt.title('Annual % population growth')
 plt.xlabel('Countries')
 plt.ylabel('population growth')
 plt.show()
+
+
+### 8. Total population
+
+df_total_population_bar = df_total_population[['Country Name', '1990', '2000', '2010', '2020']]
+df_total_population_bar = df_total_population_bar.set_index('Country Name')
+df_total_population_bar = df_total_population_bar.loc[['Nigeria', 'Algeria', 'Australia', 'Denmark', 'Singapore', 'Ireland', 
+                                    'Croatia', 'Kenya', 'Chad', 'Morocco', 'Indonesia', 'Brazil']]
+
+df_total_population_bar.plot(kind ='bar')
+plt.title('Total Population')
+plt.xlabel('Countries')
+plt.ylabel('Population')
+plt.legend(loc='center')
+plt.show()
+
 
 
 ### Correlation of indicators for different countries
@@ -619,6 +677,32 @@ plt.title('Indicators correlation for Australia')
 plt.show()
 
 
+### Correlation of indicators for Kenya; 2010 to 2020
 
+kenya = pd.DataFrame({'Agricultural land':df_agric_corr['Kenya'],
+'CO2 emission':df_CO2_corr['Kenya'], 'Renewable energy':df_energy_corr['Kenya'], 'Forest area':df_forest_corr['Kenya'], 
+'Total greenhouse':df_greenhouse_corr['Kenya'], 'Arable land':df_arable_corr['Kenya'], 
+'Population growth':df_population_corr['Kenya'], 'Access to electricity':df_electric_corr['Kenya']},
+['2010','2011','2012','2013','2014','2015','2016','2017','2018','2019','2020'])
 
+kenya = kenya.astype('float64').corr()
+sns.set_palette("bright")
+plt.figure(figsize=(8,5))
+sns.heatmap(kenya.corr(method="kendall"), annot = True, cmap = 'Pastel2')
+plt.title('Indicators correlation for Kenya')
+plt.show()
 
+### Kenya; 2000 to 2010
+
+kenya2 = pd.DataFrame({'Agricultural land':df_agric_corr['Kenya'],
+'CO2 emission':df_CO2_corr['Kenya'], 'Renewable energy':df_energy_corr['Kenya'], 'Forest area':df_forest_corr['Kenya'], 
+'Total greenhouse':df_greenhouse_corr['Kenya'], 'Arable land':df_arable_corr['Kenya'], 
+'Population growth':df_population_corr['Kenya'], 'Access to electricity':df_electric_corr['Kenya']},
+['2000','2001','2002','2003','2004','2005','2006','2007','2008','2009','2010'])
+
+kenya2 = kenya2.astype('float64').corr()
+sns.set_palette("bright")
+plt.figure(figsize=(8,5))
+sns.heatmap(kenya2.corr(method="kendall"), annot = True, cmap = 'Pastel2')
+plt.title('Indicators correlation for Kenya')
+plt.show()
