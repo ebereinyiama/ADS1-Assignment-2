@@ -405,6 +405,113 @@ plt.ylabel('Arable land')
 plt.show()
 
 
+### Barchart plots for some indicators - interval of 10 years
+
+### 1. Agricultural land
+
+df_agric_bar = df_agric[['Country Name', '1990', '2000', '2010', '2020']]
+df_agric_bar = df_agric_bar.set_index('Country Name')
+df_agric_bar = df_agric_bar.loc[['Nigeria', 'Algeria', 'Australia', 'Denmark', 'Singapore', 'Ireland', 
+                                    'Croatia', 'Kenya', 'Chad', 'Morocco', 'Indonesia', 'Brazil']]
+print(df_agric_bar)
+
+df_agric_bar.plot(kind ='bar')
+plt.title('Agricultural (land % of land area)')
+plt.xlabel('Countries')
+plt.ylabel('% of land area')
+plt.show()
+
+
+### 2. CO2 Emission
+
+df_CO2_bar = df_CO2[['Country Name', '1990', '2000', '2010', '2020']]
+df_CO2_bar = df_CO2_bar.set_index('Country Name')
+df_CO2_bar = df_CO2_bar.loc[['Nigeria', 'Algeria', 'Australia', 'Denmark', 'Singapore', 'Ireland', 
+                                    'Croatia', 'Kenya', 'Chad', 'Morocco', 'Indonesia', 'Brazil']]
+
+df_CO2_bar.plot(kind ='bar')
+plt.title('CO2 Emission (kt)')
+plt.xlabel('Countries')
+plt.ylabel('CO2 Emission')
+plt.show()
+
+
+### 3. Forest Area
+
+df_forest_bar = df_forest[['Country Name', '1990', '2000', '2010', '2020']]
+df_forest_bar = df_forest_bar.set_index('Country Name')
+df_forest_bar = df_forest_bar.loc[['Nigeria', 'Algeria', 'Australia', 'Denmark', 'Singapore', 'Ireland', 
+                                    'Croatia', 'Kenya', 'Chad', 'Morocco', 'Indonesia', 'Brazil']]
+
+df_forest_bar.plot(kind ='bar')
+plt.title('Forest area (% of land area)')
+plt.xlabel('Countries')
+plt.ylabel('forest area')
+plt.show()
+
+
+### 4. Renewable Energy
+
+df_energy_bar = df_energy[['Country Name', '1990', '2000', '2010', '2020']]
+df_energy_bar = df_energy_bar.set_index('Country Name')
+df_energy_bar = df_energy_bar.loc[['Nigeria', 'Algeria', 'Australia', 'Denmark', 'Singapore', 'Ireland', 
+                                    'Croatia', 'Kenya', 'Chad', 'Morocco', 'Indonesia', 'Brazil']]
+
+df_energy_bar.plot(kind ='bar')
+plt.title('Renewable energy consumption')
+plt.xlabel('Countries')
+plt.ylabel('Renewable energy')
+plt.show()
+
+
+### 5. Total Greenhouse Emission
+
+df_greenhouse_bar = df_greenhouse[['Country Name', '1990', '2000', '2010', '2020']]
+df_greenhouse_bar = df_greenhouse_bar.set_index('Country Name')
+df_greenhouse_bar = df_greenhouse_bar.loc[['Nigeria', 'Algeria', 'Australia', 'Denmark', 'Singapore', 'Ireland', 
+                                    'Croatia', 'Kenya', 'Chad', 'Morocco', 'Indonesia', 'Brazil']]
+
+df_greenhouse_bar.plot(kind ='bar')
+plt.title('Total greenhouse emission')
+plt.xlabel('Countries')
+plt.ylabel('greenhouse emission')
+plt.show()
+
+
+
+### 6. Arable Land
+
+df_arable_bar = df_arable[['Country Name', '1990', '2000', '2010', '2020']]
+df_arable_bar = df_arable_bar.set_index('Country Name')
+df_arable_bar = df_arable_bar.loc[['Nigeria', 'Algeria', 'Australia', 'Denmark', 'Singapore', 'Ireland', 
+                                    'Croatia', 'Kenya', 'Chad', 'Morocco', 'Indonesia', 'Brazil']]
+
+df_arable_bar.plot(kind ='bar')
+plt.title('Arable land (% of land area)')
+plt.xlabel('Countries')
+plt.ylabel('arable land')
+plt.show()
+
+
+### 7. Annual population growth
+
+df_population_bar = df_population[['Country Name', '1990', '2000', '2010', '2020']]
+df_population_bar = df_population_bar.set_index('Country Name')
+df_population_bar = df_population_bar.loc[['Nigeria', 'Algeria', 'Australia', 'Denmark', 'Singapore', 'Ireland', 
+                                    'Croatia', 'Kenya', 'Chad', 'Morocco', 'Indonesia', 'Brazil']]
+
+df_population_bar.plot(kind ='bar')
+plt.title('Annual % population growth')
+plt.xlabel('Countries')
+plt.ylabel('population growth')
+plt.show()
+
+
+
+
+
+
+
 
 
 
