@@ -565,8 +565,9 @@ plt.show()
 
 
 
-### Correlation of indicators for different countries
+### Correlation of indicators for different countries from year 2010 to 2020
 ### Kendall correlation was applied because it is robust to outliers
+
 
 df_agric_corr = df_agric_t.set_index('Year')
 df_CO2_corr = df_CO2_t.set_index('Year')
@@ -574,21 +575,17 @@ df_energy_corr = df_energy_t.set_index('Year')
 df_forest_corr = df_forest_t.set_index('Year')
 df_greenhouse_corr = df_greenhouse_t.set_index('Year')
 df_arable_corr = df_arable_t.set_index('Year')
-df_population_corr = df_population_t.set_index('Year')
+df_total_population_corr = df_total_population_t.set_index('Year')
 df_electric_corr = df_electric_t.set_index('Year')
 
-### Correlation of indicators for Nigeria years 2010 to 2020
+### Correlation of indicators for Nigeria
 
 nigeria = pd.DataFrame({'Agricultural land':df_agric_corr['Nigeria'],
-'CO2 emission':df_CO2_corr['Nigeria'], 'Renewable energy':df_energy_corr['Nigeria'], 'Forest area':df_forest_corr['Nigeria'], 
-'Total greenhouse':df_greenhouse_corr['Nigeria'], 'Arable land':df_arable_corr['Nigeria'], 
-'Population growth':df_population_corr['Nigeria'], 'Access to electricity':df_electric_corr['Nigeria']},
+'CO2 emission':df_CO2_corr['Nigeria'], 'Renewable energy':df_energy_corr['Nigeria'], 
+'Forest area':df_forest_corr['Nigeria'], 'Total greenhouse':df_greenhouse_corr['Nigeria'], 
+'Arable land':df_arable_corr['Nigeria'], 'Total population':df_total_population_corr['Nigeria'], 
+'Access to electricity':df_electric_corr['Nigeria']},
 ['2010','2011','2012','2013','2014','2015','2016','2017','2018','2019','2020'])
-
-#print(nigeria)
-
-nigeria = nigeria.astype('float64').corr() #converting the dataframe to float type
-print('The correlation of indicators for country Nigeria: \n', nigeria)
 
 nigeria = nigeria.astype('float64').corr()
 sns.set_palette("bright")
@@ -597,31 +594,14 @@ sns.heatmap(nigeria.corr(method="kendall"), annot = True, cmap = 'YlGn')
 plt.title('Indicators correlation for Nigeria')
 plt.show()
 
-
-### Nigeria; years 2000 to 2010
-nigeria2 = pd.DataFrame({'Agricultural land':df_agric_corr['Nigeria'],
-'CO2 emission':df_CO2_corr['Nigeria'], 'Renewable energy':df_energy_corr['Nigeria'], 'Forest area':df_forest_corr['Nigeria'], 
-'Total greenhouse':df_greenhouse_corr['Nigeria'], 'Arable land':df_arable_corr['Nigeria'], 
-'Population growth':df_population_corr['Nigeria'], 'Access to electricity':df_electric_corr['Nigeria']},
-['2000','2001','2002','2003','2004','2005','2006','2007','2008','2009','2010'])
-
-nigeria2 = nigeria2.astype('float64').corr()
-sns.set_palette("bright")
-plt.figure(figsize=(8,5))
-sns.heatmap(nigeria2.corr(method="kendall"), annot = True, cmap = 'YlGn')
-plt.title('Indicators correlation for Nigeria')
-plt.show()
-
-
-### Correlation of indicators for Indonesia, 2010 to 2020
+### Correlation of indicators for Indonesia
 
 indonesia = pd.DataFrame({'Agricultural land':df_agric_corr['Indonesia'],
-'CO2 emission':df_CO2_corr['Indonesia'], 'Renewable energy':df_energy_corr['Indonesia'], 'Forest area':df_forest_corr['Indonesia'], 
-'Total greenhouse':df_greenhouse_corr['Indonesia'], 'Arable land':df_arable_corr['Indonesia'], 
-'Population growth':df_population_corr['Indonesia'], 'Access to electricity':df_electric_corr['Indonesia']},
+'CO2 emission':df_CO2_corr['Indonesia'], 'Renewable energy':df_energy_corr['Indonesia'], 
+'Forest area':df_forest_corr['Indonesia'], 'Total greenhouse':df_greenhouse_corr['Indonesia'], 
+'Arable land':df_arable_corr['Indonesia'], 'Total population':df_total_population_corr['Indonesia'], 
+'Access to electricity':df_electric_corr['Indonesia']},
 ['2010','2011','2012','2013','2014','2015','2016','2017','2018','2019','2020'])
-
-print(indonesia)
 
 indonesia = indonesia.astype('float64').corr()
 sns.set_palette("bright")
@@ -630,28 +610,14 @@ sns.heatmap(indonesia.corr(method="kendall"), annot = True, cmap = 'Set3')
 plt.title('Indicators correlation for Indonesia')
 plt.show()
 
-### Indonesia 2000 to 2010
 
-indonesia2 = pd.DataFrame({'Agricultural land':df_agric_corr['Indonesia'],
-'CO2 emission':df_CO2_corr['Indonesia'], 'Renewable energy':df_energy_corr['Indonesia'], 'Forest area':df_forest_corr['Indonesia'], 
-'Total greenhouse':df_greenhouse_corr['Indonesia'], 'Arable land':df_arable_corr['Indonesia'], 
-'Population growth':df_population_corr['Indonesia'], 'Access to electricity':df_electric_corr['Indonesia']},
-['2000','2001','2002','2003','2004','2005','2006','2007','2008','2009','2010'])
-
-indonesia2 = indonesia2.astype('float64').corr()
-sns.set_palette("bright")
-plt.figure(figsize=(8,5))
-sns.heatmap(indonesia2.corr(method="kendall"), annot = True, cmap = 'Set3')
-plt.title('Indicators correlation for Indonesia2')
-plt.show()
-
-
-### Correlation of indicators for Australia 2010 to 2020
+### Correlation of indicators for Australia
 
 australia = pd.DataFrame({'Agricultural land':df_agric_corr['Australia'],
-'CO2 emission':df_CO2_corr['Australia'], 'Renewable energy':df_energy_corr['Australia'], 'Forest area':df_forest_corr['Australia'], 
-'Total greenhouse':df_greenhouse_corr['Australia'], 'Arable land':df_arable_corr['Australia'], 
-'Population growth':df_population_corr['Australia'], 'Access to electricity':df_electric_corr['Australia']},
+'CO2 emission':df_CO2_corr['Australia'], 'Renewable energy':df_energy_corr['Australia'], 
+'Forest area':df_forest_corr['Australia'], 'Total greenhouse':df_greenhouse_corr['Australia'], 
+'Arable land':df_arable_corr['Australia'], 'Total population':df_total_population_corr['Australia'], 
+'Access to electricity':df_electric_corr['Australia']},
 ['2010','2011','2012','2013','2014','2015','2016','2017','2018','2019','2020'])
 
 australia = australia.astype('float64').corr()
@@ -661,28 +627,14 @@ sns.heatmap(australia.corr(method="kendall"), annot = True, cmap = 'Pastel2')
 plt.title('Indicators correlation for Australia')
 plt.show()
 
-### Australia 2000 to 2010
 
-australia2 = pd.DataFrame({'Agricultural land':df_agric_corr['Australia'],
-'CO2 emission':df_CO2_corr['Australia'], 'Renewable energy':df_energy_corr['Australia'], 'Forest area':df_forest_corr['Australia'], 
-'Total greenhouse':df_greenhouse_corr['Australia'], 'Arable land':df_arable_corr['Australia'], 
-'Population growth':df_population_corr['Australia'], 'Access to electricity':df_electric_corr['Australia']},
-['2000','2001','2002','2003','2004','2005','2006','2007','2008','2009','2010'])
-
-australia2 = australia2.astype('float64').corr()
-sns.set_palette("bright")
-plt.figure(figsize=(8,5))
-sns.heatmap(australia2.corr(method="kendall"), annot = True, cmap = 'Pastel2')
-plt.title('Indicators correlation for Australia')
-plt.show()
-
-
-### Correlation of indicators for Kenya; 2010 to 2020
+### Correlation of indicators for Kenya
 
 kenya = pd.DataFrame({'Agricultural land':df_agric_corr['Kenya'],
-'CO2 emission':df_CO2_corr['Kenya'], 'Renewable energy':df_energy_corr['Kenya'], 'Forest area':df_forest_corr['Kenya'], 
-'Total greenhouse':df_greenhouse_corr['Kenya'], 'Arable land':df_arable_corr['Kenya'], 
-'Population growth':df_population_corr['Kenya'], 'Access to electricity':df_electric_corr['Kenya']},
+'CO2 emission':df_CO2_corr['Kenya'], 'Renewable energy':df_energy_corr['Kenya'], 
+'Forest area':df_forest_corr['Kenya'], 'Total greenhouse':df_greenhouse_corr['Kenya'], 
+'Arable land':df_arable_corr['Kenya'], 'Total population':df_total_population_corr['Kenya'], 
+'Access to electricity':df_electric_corr['Kenya']},
 ['2010','2011','2012','2013','2014','2015','2016','2017','2018','2019','2020'])
 
 kenya = kenya.astype('float64').corr()
@@ -692,17 +644,22 @@ sns.heatmap(kenya.corr(method="kendall"), annot = True, cmap = 'Pastel2')
 plt.title('Indicators correlation for Kenya')
 plt.show()
 
-### Kenya; 2000 to 2010
 
-kenya2 = pd.DataFrame({'Agricultural land':df_agric_corr['Kenya'],
-'CO2 emission':df_CO2_corr['Kenya'], 'Renewable energy':df_energy_corr['Kenya'], 'Forest area':df_forest_corr['Kenya'], 
-'Total greenhouse':df_greenhouse_corr['Kenya'], 'Arable land':df_arable_corr['Kenya'], 
-'Population growth':df_population_corr['Kenya'], 'Access to electricity':df_electric_corr['Kenya']},
-['2000','2001','2002','2003','2004','2005','2006','2007','2008','2009','2010'])
+### Correlation of indicators for Denmark
 
-kenya2 = kenya2.astype('float64').corr()
+denmark = pd.DataFrame({'Agricultural land':df_agric_corr['Denmark'],
+'CO2 emission':df_CO2_corr['Denmark'], 'Renewable energy':df_energy_corr['Denmark'], 
+'Forest area':df_forest_corr['Denmark'], 'Total greenhouse':df_greenhouse_corr['Denmark'], 
+'Arable land':df_arable_corr['Denmark'], 'Total population':df_total_population_corr['Denmark'], 
+'Access to electricity':df_electric_corr['Denmark']},
+['2010','2011','2012','2013','2014','2015','2016','2017','2018','2019','2020'])
+
+denmark = denmark.astype('float64').corr()
 sns.set_palette("bright")
 plt.figure(figsize=(8,5))
-sns.heatmap(kenya2.corr(method="kendall"), annot = True, cmap = 'Pastel2')
-plt.title('Indicators correlation for Kenya')
+sns.heatmap(denmark.corr(method="kendall"), annot = True, cmap = 'Pastel2')
+plt.title('Indicators correlation for Denmark')
 plt.show()
+
+
+
