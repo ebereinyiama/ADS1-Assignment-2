@@ -576,6 +576,7 @@ df_greenhouse_corr = df_greenhouse_t.set_index('Year')
 df_arable_corr = df_arable_t.set_index('Year')
 df_total_population_corr = df_total_population_t.set_index('Year')
 df_electric_corr = df_electric_t.set_index('Year')
+df_manufacturing_corr = df_manufacturing_t.set_index('Year')
 
 
 ### Correlation of indicators for Nigeria
@@ -708,29 +709,38 @@ plt.title('Indicators correlation for Denmark')
 plt.show()
 
 
+### Calculating the skewness and kurtosis of the Manufacturing value added of % GDP
 
-### Calculating the skewness and kurtosis of the indicators
+### For Algeria
 
-df_stats_nigeria = pd.DataFrame({'Agricultural land':df_agric_corr['Nigeria'],
-'CO2 emission':df_CO2_corr['Nigeria'], 'Renewable energy':df_energy_corr['Nigeria'], 
-'Forest area':df_forest_corr['Nigeria'], 'Total greenhouse':df_greenhouse_corr['Nigeria'], 
-'Arable land':df_arable_corr['Nigeria'], 'Total population':df_total_population_corr['Nigeria'], 
-'Access to electricity':df_electric_corr['Nigeria']},
+df_stats_algeria = pd.DataFrame({'Manufacturing':df_manufacturing_corr['Algeria']},
 ['2000', '2001', '2002', '2003', '2004', '2005', '2006', '2007', '2008', '2009',
  '2010','2011','2012','2013','2014','2015','2016','2017','2018','2019'])
 
-aver1 = np.mean(df_stats_nigeria["Agricultural land"])
-print("Average:", aver1)
-std1= np.std(df_stats_nigeria["Agricultural land"])
-print("Std. deviation:", std1)
-print("Skew:", stats.skew(df_stats_nigeria["Agricultural land"]))
-print("Kurtosis", stats.kurtosis(df_stats_nigeria["Agricultural land"]))
+df_stats_algeria = df_stats_algeria.astype('float64')
+aver_algeria = np.mean(df_stats_algeria["Manufacturing"])
+print()
+print("Algeria_average:", aver_algeria)
+med_algeria = np.median(df_stats_algeria["Manufacturing"])
+print("Algeria_median:", med_algeria)
+std_algeria = np.std(df_stats_algeria["Manufacturing"])
+print("Algeria_Std:", std_algeria)
+print("Algeria_Skew:", stats.skew(df_stats_algeria["Manufacturing"]))
+print("Algeria_Kurtosis:", stats.kurtosis(df_stats_algeria["Manufacturing"]))
 
+## For Ireland
 
+df_stats_ireland = pd.DataFrame({'Manufacturing':df_manufacturing_corr['Ireland']},
+['2000', '2001', '2002', '2003', '2004', '2005', '2006', '2007', '2008', '2009',
+ '2010','2011','2012','2013','2014','2015','2016','2017','2018','2019'])
 
-
-
-
-
-
-
+df_stats_ireland = df_stats_ireland.astype('float64')
+aver_ireland = np.mean(df_stats_ireland["Manufacturing"])
+print()
+print("Ireland_average:", aver_ireland)
+med_ireland = np.median(df_stats_ireland["Manufacturing"])
+print("Ireland_median:", med_ireland)
+std_ireland = np.std(df_stats_ireland["Manufacturing"])
+print("Ireland_Std:", std_ireland)
+print("Ireland_Skew:", stats.skew(df_stats_ireland["Manufacturing"]))
+print("Ireland_Kurtosis:", stats.kurtosis(df_stats_ireland["Manufacturing"]))
