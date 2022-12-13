@@ -7,7 +7,7 @@ This is a temporary script file.
 
 import pandas as pd
 import numpy as np
-import seaborn as sns
+import scipy.stats as stats
 import matplotlib.pyplot as plt
 
 ### 10 countries of the world were selected and analyzed for 9 different indicators
@@ -565,9 +565,8 @@ plt.show()
 
 
 
-### Correlation of indicators for different countries from year 2010 to 2020
+### Correlation of indicators for different countries from year 2000 to 2019
 ### Kendall correlation was applied because it is robust to outliers
-
 
 df_agric_corr = df_agric_t.set_index('Year')
 df_CO2_corr = df_CO2_t.set_index('Year')
@@ -578,6 +577,7 @@ df_arable_corr = df_arable_t.set_index('Year')
 df_total_population_corr = df_total_population_t.set_index('Year')
 df_electric_corr = df_electric_t.set_index('Year')
 
+
 ### Correlation of indicators for Nigeria
 
 nigeria = pd.DataFrame({'Agricultural land':df_agric_corr['Nigeria'],
@@ -585,14 +585,24 @@ nigeria = pd.DataFrame({'Agricultural land':df_agric_corr['Nigeria'],
 'Forest area':df_forest_corr['Nigeria'], 'Total greenhouse':df_greenhouse_corr['Nigeria'], 
 'Arable land':df_arable_corr['Nigeria'], 'Total population':df_total_population_corr['Nigeria'], 
 'Access to electricity':df_electric_corr['Nigeria']},
-['2010','2011','2012','2013','2014','2015','2016','2017','2018','2019','2020'])
+['2000', '2001', '2002', '2003', '2004', '2005', '2006', '2007', '2008', '2009',
+ '2010','2011','2012','2013','2014','2015','2016','2017','2018','2019'])
 
-nigeria = nigeria.astype('float64').corr()
-sns.set_palette("bright")
-plt.figure(figsize=(8,5))
-sns.heatmap(nigeria.corr(method="kendall"), annot = True, cmap = 'YlGn')
+nigeria = nigeria.astype('float64').corr(method="kendall") #float64 converts the values to float
+plt.imshow(nigeria, cmap = 'YlGn', interpolation='none') #imshow is matplot function for heatmap
+plt.colorbar()
+plt.xticks(range(len(nigeria.columns)), nigeria.columns, rotation=90)
+plt.yticks(range(len(nigeria.columns)), nigeria.columns)
+plt.gcf().set_size_inches(8, 5)
+
+labels = nigeria.corr().values
+for i in range(labels.shape[0]):
+    for j in range(labels.shape[1]):
+        plt.text(i, j, '{:.2f}'.format(labels[i, j]), ha='center', va='center', color='black')
+    
 plt.title('Indicators correlation for Nigeria')
 plt.show()
+
 
 ### Correlation of indicators for Indonesia
 
@@ -601,12 +611,21 @@ indonesia = pd.DataFrame({'Agricultural land':df_agric_corr['Indonesia'],
 'Forest area':df_forest_corr['Indonesia'], 'Total greenhouse':df_greenhouse_corr['Indonesia'], 
 'Arable land':df_arable_corr['Indonesia'], 'Total population':df_total_population_corr['Indonesia'], 
 'Access to electricity':df_electric_corr['Indonesia']},
-['2010','2011','2012','2013','2014','2015','2016','2017','2018','2019','2020'])
+['2000', '2001', '2002', '2003', '2004', '2005', '2006', '2007', '2008', '2009',
+ '2010','2011','2012','2013','2014','2015','2016','2017','2018','2019'])
 
-indonesia = indonesia.astype('float64').corr()
-sns.set_palette("bright")
-plt.figure(figsize=(8,5))
-sns.heatmap(indonesia.corr(method="kendall"), annot = True, cmap = 'Set3')
+indonesia = indonesia.astype('float64').corr(method="kendall")
+plt.imshow(indonesia, cmap = 'Set3', interpolation='none')
+plt.colorbar()
+plt.xticks(range(len(indonesia.columns)), indonesia.columns, rotation=90)
+plt.yticks(range(len(indonesia.columns)), indonesia.columns)
+plt.gcf().set_size_inches(8, 5)
+
+labels = indonesia.corr().values
+for i in range(labels.shape[0]):
+    for j in range(labels.shape[1]):
+        plt.text(i, j, '{:.2f}'.format(labels[i, j]), ha='center', va='center', color='black')
+    
 plt.title('Indicators correlation for Indonesia')
 plt.show()
 
@@ -618,12 +637,21 @@ australia = pd.DataFrame({'Agricultural land':df_agric_corr['Australia'],
 'Forest area':df_forest_corr['Australia'], 'Total greenhouse':df_greenhouse_corr['Australia'], 
 'Arable land':df_arable_corr['Australia'], 'Total population':df_total_population_corr['Australia'], 
 'Access to electricity':df_electric_corr['Australia']},
-['2010','2011','2012','2013','2014','2015','2016','2017','2018','2019','2020'])
+['2000', '2001', '2002', '2003', '2004', '2005', '2006', '2007', '2008', '2009',
+ '2010','2011','2012','2013','2014','2015','2016','2017','2018','2019'])
 
-australia = australia.astype('float64').corr()
-sns.set_palette("bright")
-plt.figure(figsize=(8,5))
-sns.heatmap(australia.corr(method="kendall"), annot = True, cmap = 'Pastel2')
+australia = australia.astype('float64').corr(method="kendall")
+plt.imshow(australia, cmap = 'Pastel2', interpolation='none')
+plt.colorbar()
+plt.xticks(range(len(australia.columns)), australia.columns, rotation=90)
+plt.yticks(range(len(australia.columns)), australia.columns)
+plt.gcf().set_size_inches(8, 5)
+
+labels = australia.corr().values
+for i in range(labels.shape[0]):
+    for j in range(labels.shape[1]):
+        plt.text(i, j, '{:.2f}'.format(labels[i, j]), ha='center', va='center', color='black')
+    
 plt.title('Indicators correlation for Australia')
 plt.show()
 
@@ -635,12 +663,21 @@ kenya = pd.DataFrame({'Agricultural land':df_agric_corr['Kenya'],
 'Forest area':df_forest_corr['Kenya'], 'Total greenhouse':df_greenhouse_corr['Kenya'], 
 'Arable land':df_arable_corr['Kenya'], 'Total population':df_total_population_corr['Kenya'], 
 'Access to electricity':df_electric_corr['Kenya']},
-['2010','2011','2012','2013','2014','2015','2016','2017','2018','2019','2020'])
+['2000', '2001', '2002', '2003', '2004', '2005', '2006', '2007', '2008', '2009',
+ '2010','2011','2012','2013','2014','2015','2016','2017','2018','2019'])
 
-kenya = kenya.astype('float64').corr()
-sns.set_palette("bright")
-plt.figure(figsize=(8,5))
-sns.heatmap(kenya.corr(method="kendall"), annot = True, cmap = 'Pastel2')
+kenya = kenya.astype('float64').corr(method="kendall")
+plt.imshow(kenya, cmap = 'Blues', interpolation='none')
+plt.colorbar()
+plt.xticks(range(len(kenya.columns)), kenya.columns, rotation=90)
+plt.yticks(range(len(kenya.columns)), kenya.columns)
+plt.gcf().set_size_inches(8, 5)
+
+labels = kenya.corr().values
+for i in range(labels.shape[0]):
+    for j in range(labels.shape[1]):
+        plt.text(i, j, '{:.2f}'.format(labels[i, j]), ha='center', va='center', color='black')
+    
 plt.title('Indicators correlation for Kenya')
 plt.show()
 
@@ -652,14 +689,48 @@ denmark = pd.DataFrame({'Agricultural land':df_agric_corr['Denmark'],
 'Forest area':df_forest_corr['Denmark'], 'Total greenhouse':df_greenhouse_corr['Denmark'], 
 'Arable land':df_arable_corr['Denmark'], 'Total population':df_total_population_corr['Denmark'], 
 'Access to electricity':df_electric_corr['Denmark']},
-['2010','2011','2012','2013','2014','2015','2016','2017','2018','2019','2020'])
+['2000', '2001', '2002', '2003', '2004', '2005', '2006', '2007', '2008', '2009',
+ '2010','2011','2012','2013','2014','2015','2016','2017','2018','2019'])
 
-denmark = denmark.astype('float64').corr()
-sns.set_palette("bright")
-plt.figure(figsize=(8,5))
-sns.heatmap(denmark.corr(method="kendall"), annot = True, cmap = 'Pastel2')
+denmark = denmark.astype('float64').corr(method="kendall")
+plt.imshow(denmark, cmap = 'Pastel2', interpolation='none')
+plt.colorbar()
+plt.xticks(range(len(denmark.columns)), denmark.columns, rotation=90)
+plt.yticks(range(len(denmark.columns)), denmark.columns)
+plt.gcf().set_size_inches(8, 5)
+
+labels = denmark.corr().values
+for i in range(labels.shape[0]):
+    for j in range(labels.shape[1]):
+        plt.text(i, j, '{:.2f}'.format(labels[i, j]), ha='center', va='center', color='black')
+    
 plt.title('Indicators correlation for Denmark')
 plt.show()
+
+
+
+### Calculating the skewness and kurtosis of the indicators
+
+df_stats_nigeria = pd.DataFrame({'Agricultural land':df_agric_corr['Nigeria'],
+'CO2 emission':df_CO2_corr['Nigeria'], 'Renewable energy':df_energy_corr['Nigeria'], 
+'Forest area':df_forest_corr['Nigeria'], 'Total greenhouse':df_greenhouse_corr['Nigeria'], 
+'Arable land':df_arable_corr['Nigeria'], 'Total population':df_total_population_corr['Nigeria'], 
+'Access to electricity':df_electric_corr['Nigeria']},
+['2000', '2001', '2002', '2003', '2004', '2005', '2006', '2007', '2008', '2009',
+ '2010','2011','2012','2013','2014','2015','2016','2017','2018','2019'])
+
+aver1 = np.mean(df_stats_nigeria["Agricultural land"])
+print("Average:", aver1)
+std1= np.std(df_stats_nigeria["Agricultural land"])
+print("Std. deviation:", std1)
+print("Skew:", stats.skew(df_stats_nigeria["Agricultural land"]))
+print("Kurtosis", stats.kurtosis(df_stats_nigeria["Agricultural land"]))
+
+
+
+
+
+
 
 
 
